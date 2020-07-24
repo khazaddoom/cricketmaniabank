@@ -29,22 +29,28 @@
           data2.push(value)
         }
         console.log(data2)
-        addLifes(data2[0], data2[1], data2[3])
+        addLifes(parseInt(data2[0]), parseInt(data2[1]), parseInt(data2[2]))
         // submit the data via XHR
       });
-
+     
       async function addLifes(inventoryId, userId, quantity) {
+        
         const data = {
           user_id: userId,
-          inventory: { inventory_id: inventoryId, action_type: 1, quantity },
-        };
-        console.log(data)
+          inventory: JSON.stringify({
+            inventory_id: inventoryId,
+            action_type: 1,
+            quantity: quantity,
+          }),
+        };       
+        
         fetch("https://api.juegogames.com/CRICKETMANIA-DEV/userInventory", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded"
           },
-          body: JSON.stringify(data),
+           body: new URLSearchParams(data).toString()
+          
         })
           .then((response) => response.json())
           .then((data) => {
