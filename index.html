@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <form id="form">
+      <h4></h4>
+      <p>Inventory-id for COINS = 1</p>
+      <p>Inventory-id for LIFES = 2</p>
+      <label for="fname">INVENTORY-ID</label>
+      <input type="number" id="fname" name="fname" /><br /><br />
+      <label for="fname">USER-ID</label>
+      <input type="number" id="fname" name="fname" /><br /><br />
+      <label for="lname">QUANTITY</label>
+      <input type="number" id="lname" name="lname" /><br /><br />
+      <input type="submit" value="ADD" />
+    </form>
+
+    <script>
+      const formElem = document.querySelector("form");
+      formElem.addEventListener("submit", (e) => {
+        e.preventDefault();
+        new FormData(formElem);
+      });
+      formElem.addEventListener("formdata", (e) => {
+        let data = e.formData;
+        let data2 = []
+        for (var value of data.values()) {
+          console.log(value);
+          data2.push(value)
+        }
+        console.log(data2)
+        addLifes(data2[0], data2[1], data2[3])
+        // submit the data via XHR
+      });
+
+      async function addLifes(inventoryId, userId, quantity) {
+        const data = {
+          user_id: userId,
+          inventory: { inventory_id: inventoryId, action_type: 1, quantity },
+        };
+        console.log(data)
+        fetch("https://api.juegogames.com/CRICKETMANIA-DEV/userInventory", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Success:", data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    </script>
+  </body>
+</html>
