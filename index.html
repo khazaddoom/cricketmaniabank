@@ -1,19 +1,78 @@
 <!DOCTYPE html>
 <html>
-  <head> </head>
+  <head>
+    <title>CricketMania Free Credits</title>
+    <style>
+
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      body {
+        width: 60vw;
+        margin: 0 auto;
+        transform: translateY(30%);
+      }
+      .form_container {
+        padding: 25px;
+        background: #fff;
+      }
+      .header {
+        background: #3f9cb5;
+        padding: 30px 25px;
+        font-size: 30px;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        border-radius: 3px 3px 0 0;
+      }
+
+      .button {
+        font-size: 18px;
+        color: #4e4e4e;
+        margin: 10px 0;
+        border: 2px solid #ccc;
+        border-radius: 0;
+        padding: 10px 25px;
+        transition: all 0.5s ease 0s;
+      }
+
+      .heading {
+          font-size: 16px;
+          color: #1b0fc7;
+          margin: 10px 0 20px 0;
+          text-transform: capitalize;
+          font-weight: 700;
+      }
+
+    </style>
+  </head>
+  
   <body>
-    <form id="form">
-      <h4></h4>
-      <p>Inventory-id for COINS = 1</p>
-      <p>Inventory-id for LIFES = 2</p>
-      <label for="fname">INVENTORY-ID</label>
-      <input type="number" id="fname" name="fname" /><br /><br />
-      <label for="fname">USER-ID</label>
-      <input type="number" id="fname" name="fname" /><br /><br />
-      <label for="lname">QUANTITY</label>
-      <input type="number" id="lname" name="lname" /><br /><br />
-      <input type="submit" value="ADD" />
-    </form>
+
+    <div class="header">
+      CricketMania Free Credits
+    </div>    
+    <div class="form_container">
+      <form id="form">
+        <h4></h4>
+        <div class="heading">
+          <p>Inventory-id for COINS = 1</p>
+          <p>Inventory-id for LIFES = 2</p>
+        </div>
+        
+        <label for="fname">INVENTORY-ID</label>
+        <input type="number" id="fname" name="fname" class="form-control" /><br /><br />
+        <label for="fname">USER-ID</label>
+        <input type="number" id="fname" name="fname" /><br /><br />
+        <label for="lname">QUANTITY</label>
+        <input type="number" id="lname" name="lname" /><br /><br />
+        <input type="submit" value="ADD" class="button"/>
+      </form>
+    </div>
 
     <script>
       const formElem = document.querySelector("form");
@@ -54,10 +113,14 @@
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log("Success:", data);
+            if(data.responseCode == 200)
+              alert("Success")
+            else
+              alert("Something went wrong, Please try again")
           })
           .catch((error) => {
             console.error("Error:", error);
+            alert("")
           });
       }
     </script>
